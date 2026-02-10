@@ -1,38 +1,33 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { playlists, songs, type Playlist, type Song, type InsertPlaylist, type InsertSong } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getPlaylist(id: number): Promise<Playlist | undefined>;
+  getPlaylistSongs(playlistId: number): Promise<Song[]>;
+  createPlaylist(playlist: InsertPlaylist): Promise<Playlist>;
+  createSong(song: InsertSong): Promise<Song>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async getPlaylist(id: number): Promise<Playlist | undefined> {
+    const [playlist] = await db.select().from(playlists).where(eq(playlists.id, id));
+    return playlist;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getPlaylistSongs(playlistId: number): Promise<Song[]> {
+    return await db.select().from(songs).where(eq(songs.playlistId, playlistId));
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async createPlaylist(insertPlaylist: InsertPlaylist): Promise<Playlist> {
+    const [playlist] = await db.insert(playlists).values(insertPlaylist).returning();
+    return playlist;
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async createSong(insertSong: InsertSong): Promise<Song> {
+    const [song] = await db.insert(songs).values(insertSong).returning();
+    return song;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

@@ -65,6 +65,11 @@ export default {
           foreground: "hsl(var(--sidebar-foreground) / <alpha-value>)",
           border: "hsl(var(--sidebar-border) / <alpha-value>)",
         },
+        spotify: {
+          DEFAULT: "#1DB954",
+          hover: "#1ed760",
+          black: "#191414"
+        },
         "sidebar-primary": {
           DEFAULT: "hsl(var(--sidebar-primary) / <alpha-value>)",
           foreground: "hsl(var(--sidebar-primary-foreground) / <alpha-value>)",
