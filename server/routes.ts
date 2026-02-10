@@ -38,15 +38,15 @@ async function seedDatabase() {
   if (existing) return;
 
   const playlist = await storage.createPlaylist({
-    name: "Late Night Vibes",
-    description: "Chill beats to study and relax to.",
-    author: "Spotify",
-    coverUrl: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=500&auto=format&fit=crop",
-    likes: 12345,
+    name: "Poetry Playlist",
+    description: "Poetry Playlist for English",
+    author: "Krish 78FI",
+    coverUrl: "https://lh3.googleusercontent.com/drive-storage/AJQWtBO1ps2OmsE6QJCFIHGlUfmVLf5NXeedvEhoDhQnCIvsmQGT3zVW0dc7G8NdFp6e5lZWNt1K6t1UzBxDQjP-IyUn5pxSp_tIpvkI54lSQdqPy4Ho=w1920-h919?auditContext=forDisplay",
+    likes: 78,
   });
 
   const songs = [
-    { title: "Midnight City", artist: "M83", album: "Hurry Up, We're Dreaming", duration: "4:03", coverUrl: "https://images.unsplash.com/photo-1619983081563-430f63602796?q=80&w=200&auto=format&fit=crop" },
+    { title: "Ric Flair Drip", artist: "Metro Boomin, Offset", album: "Without Warning", duration: "2:53", coverUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/d/de/21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png/250px-21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png" },
     { title: "Instant Crush", artist: "Daft Punk", album: "Random Access Memories", duration: "5:37", coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=200&auto=format&fit=crop" },
     { title: "The Less I Know The Better", artist: "Tame Impala", album: "Currents", duration: "3:36", coverUrl: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop" },
     { title: "Breezeblocks", artist: "Alt-J", album: "An Awesome Wave", duration: "3:47", coverUrl: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=200&auto=format&fit=crop" },
