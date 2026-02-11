@@ -7,6 +7,8 @@ export interface IStorage {
   getPlaylistSongs(playlistId: number): Promise<Song[]>;
   createPlaylist(playlist: InsertPlaylist): Promise<Playlist>;
   createSong(song: InsertSong): Promise<Song>;
+  updatePlaylist(id: number, playlist: Partial<InsertPlaylist>): Promise<Playlist>;
+  clearPlaylistSongs(playlistId: number): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -27,6 +29,15 @@ export class DatabaseStorage implements IStorage {
   async createSong(insertSong: InsertSong): Promise<Song> {
     const [song] = await db.insert(songs).values(insertSong).returning();
     return song;
+  }
+
+  async updatePlaylist(id: number, playlist: Partial<InsertPlaylist>): Promise<Playlist> {
+    const [updated] = await db.update(playlists).set(playlist).where(eq(playlists.id, id)).returning();
+    return updated;
+  }
+
+  async clearPlaylistSongs(playlistId: number): Promise<void> {
+    await db.delete(songs).where(eq(songs.playlistId, playlistId));
   }
 }
 

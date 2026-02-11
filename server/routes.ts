@@ -34,29 +34,30 @@ export async function registerRoutes(
 }
 
 async function seedDatabase() {
-  const existing = await storage.getPlaylist(1);
-  if (existing) {
-    // We update the existing playlist to match the new request
-    const p = await storage.getPlaylist(1);
-    if (p) {
-      // In a real app we'd have an update method, but for this simple seed logic
-      // we'll just check if it needs update or recreate if it's a seed
-    }
-  }
-
-  // To ensure the new details are applied, we'll recreate if needed or just skip if already set
-  // But the user specifically asked for these changes.
-  // I will check the first song specifically to see if it's the new one.
-  const firstSong = (await storage.getPlaylistSongs(1))[0];
-  if (firstSong && firstSong.title === "Ric Flair Drip") return;
-
-  const playlist = await storage.createPlaylist({
+  const playlistData = {
     name: "Poetry Playlist",
     description: "English Poetry Playlist",
     author: "Krish 78FI",
     coverUrl: "https://lh3.googleusercontent.com/drive-storage/AJQWtBPQ9D31HdFhktF31LbbkZ7Fru-XGdWJMlm7FHF_4pN8tF-6r5tOF_C-476YjLxI4bNVE7HMZifTudPf3B6VmDBpKmiebxLNnUS1LaleqZYYp3h9=w1366-h647?auditContext=forDisplay",
     likes: 12345,
-  });
+  };
+
+  const existing = await storage.getPlaylist(1);
+  if (existing) {
+    // Force update to match requested details
+    await storage.updatePlaylist(1, playlistData);
+    
+    // Check if songs need update (simple check: if first song isn't Ric Flair Drip)
+    const currentSongs = await storage.getPlaylistSongs(1);
+    if (currentSongs.length > 0 && currentSongs[0].title === "Ric Flair Drip") {
+      return; 
+    }
+    
+    // Clear and re-add songs to ensure correct order/details
+    await storage.clearPlaylistSongs(1);
+  } else {
+    await storage.createPlaylist(playlistData);
+  }
 
   const songsData = [
     { title: "Ric Flair Drip", artist: "Metro Boomin & Offset", album: "Without Warning", duration: "2:52", coverUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/d/de/21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png/250px-21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png", meaning: "This song is a high-energy celebration of success and the lavish lifestyle associated with it. The 'Ric Flair Drip' refers to the flamboyant style of legendary wrestler Ric Flair, symbolizing wealth and confidence. Offset's verses describe his journey to the top, while Metro Boomin's production provides a hard-hitting backdrop. It's an anthem of achievement and style." },
@@ -74,7 +75,7 @@ async function seedDatabase() {
   for (const song of songsData) {
     await storage.createSong({
       ...song,
-      playlistId: playlist.id
+      playlistId: 1
     });
   }
   
