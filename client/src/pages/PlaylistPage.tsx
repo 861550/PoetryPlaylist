@@ -132,8 +132,7 @@ export default function PlaylistPage() {
             )}
 
             <div className="mt-8 pt-8 border-t border-white/10 text-xs text-muted-foreground flex flex-col gap-1">
-               <p>© 2024 {playlist.author} Records</p>
-               <p>℗ 2024 {playlist.author} Records</p>
+               <p>© Krish 78FI English Poetry Playlist</p>
             </div>
           </div>
         </div>

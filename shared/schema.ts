@@ -19,6 +19,7 @@ export const songs = pgTable("songs", {
   album: text("album").notNull(),
   coverUrl: text("cover_url").notNull(),
   duration: text("duration").notNull(),
+  meaning: text("meaning").default("This song explores themes of success, perseverance, and the artist's lifestyle."),
 });
 
 export const insertPlaylistSchema = createInsertSchema(playlists).omit({ id: true });
