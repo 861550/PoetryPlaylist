@@ -41,7 +41,7 @@ export function PlaylistHeader({ playlist, songCount, totalDuration = "3 hr 15 m
           </div>
           <span className="hover:underline cursor-pointer">{playlist.author}</span>
           <span className="text-white/60 mx-1">•</span>
-          <span className="text-white/60">{playlist.likes.toLocaleString()} likes</span>
+          <span className="text-white/60">{(playlist.likes ?? 0).toLocaleString()} likes</span>
           <span className="text-white/60 mx-1">•</span>
           <span className="text-white/60">{songCount} songs,</span>
           <span className="text-white/60 ml-1 font-normal opacity-80">{totalDuration}</span>
