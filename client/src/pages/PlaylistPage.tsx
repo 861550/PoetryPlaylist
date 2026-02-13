@@ -76,11 +76,19 @@ export default function PlaylistPage() {
     setCurrentSong(song);
     setIsPlaying(true);
     setCurrentTime(0);
-    // In a real app with audio files, we'd do:
-    // if (audioRef.current) {
-    //   audioRef.current.src = `/audio/${song.id}.mp3`;
-    //   audioRef.current.play();
-    // }
+    
+    // Create or update audio element
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+    }
+    
+    // Point to the public audio folder
+    // Note: User needs to upload files as 1.mp3, 2.mp3 etc in client/public/audio/
+    audioRef.current.src = `/audio/${song.id}.mp3`;
+    audioRef.current.play().catch(err => {
+      console.error("Playback failed:", err);
+      // We still simulate the UI progress even if file is missing
+    });
   };
 
   const handleNext = () => {
@@ -93,8 +101,21 @@ export default function PlaylistPage() {
     }
   };
 
-  const togglePlay = () => setIsPlaying(!isPlaying);
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(console.error);
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   const stopPlayback = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
     setIsPlaying(false);
     setCurrentTime(0);
     setCurrentSong(null);
