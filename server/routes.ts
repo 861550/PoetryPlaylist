@@ -44,16 +44,8 @@ async function seedDatabase() {
 
   const existing = await storage.getPlaylist(1);
   if (existing) {
-    // Force update to match requested details
     await storage.updatePlaylist(1, playlistData);
-    
-    // Check if songs need update (simple check: if first song isn't Ric Flair Drip)
-    const currentSongs = await storage.getPlaylistSongs(1);
-    if (currentSongs.length > 0 && currentSongs[0].title === "Ric Flair Drip") {
-      return; 
-    }
-    
-    // Clear and re-add songs to ensure correct order/details
+    // Always refresh songs to match the new list of 8
     await storage.clearPlaylistSongs(1);
   } else {
     await storage.createPlaylist(playlistData);
@@ -61,15 +53,13 @@ async function seedDatabase() {
 
   const songsData = [
     { title: "Ric Flair Drip", artist: "Metro Boomin & Offset", album: "Without Warning", duration: "2:52", coverUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/d/de/21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png/250px-21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png", meaning: "This song is a high-energy celebration of success and the lavish lifestyle associated with it. The 'Ric Flair Drip' refers to the flamboyant style of legendary wrestler Ric Flair, symbolizing wealth and confidence. Offset's verses describe his journey to the top, while Metro Boomin's production provides a hard-hitting backdrop. It's an anthem of achievement and style." },
-    { title: "Instant Crush", artist: "Daft Punk", album: "Random Access Memories", duration: "5:37", coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=200&auto=format&fit=crop", meaning: "A nostalgic look at a sudden attraction that feels like it could last forever, even if it's only for a moment. It captures the bittersweet essence of fleeting connections." },
-    { title: "The Less I Know The Better", artist: "Tame Impala", album: "Currents", duration: "3:36", coverUrl: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop", meaning: "A relatable tale of romantic disappointment and the painful process of moving on. The disco-infused beat masks the underlying heartache of seeing a former flame with someone else." },
-    { title: "Breezeblocks", artist: "Alt-J", album: "An Awesome Wave", duration: "3:47", coverUrl: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=200&auto=format&fit=crop", meaning: "A complex exploration of an obsessive relationship. It uses vivid imagery and literary references to describe the desperate desire to hold onto someone, even when the relationship has turned toxic." },
-    { title: "Do I Wanna Know?", artist: "Arctic Monkeys", album: "AM", duration: "4:32", coverUrl: "https://images.unsplash.com/photo-1514525253440-b393452e8d03?q=80&w=200&auto=format&fit=crop", meaning: "The song delves into the uncertainty and late-night rumination that comes with unrequited feelings or a complicated relationship. The heavy, bluesy riff underscores the intensity of the emotions." },
-    { title: "Safe And Sound", artist: "Capital Cities", album: "In A Tidal Wave Of Mystery", duration: "3:13", coverUrl: "https://images.unsplash.com/photo-1459749411177-71296491864c?q=80&w=200&auto=format&fit=crop", meaning: "An optimistic anthem about finding safety and comfort in a loved one despite the chaos of the world. It's a celebration of resilience and companionship." },
-    { title: "Pumped Up Kicks", artist: "Foster The People", album: "Torches", duration: "4:00", coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?q=80&w=200&auto=format&fit=crop", meaning: "While the melody is catchy and upbeat, the lyrics offer a dark commentary on youth alienation. It serves as a reminder to look beneath the surface of pop culture." },
-    { title: "Sweater Weather", artist: "The Neighbourhood", album: "I Love You.", duration: "4:00", coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=200&auto=format&fit=crop", meaning: "A moody, atmospheric track that captures the feeling of intimacy and the desire for closeness during the colder months. It's a song about find warmth in another person." },
-    { title: "Team", artist: "Lorde", album: "Pure Heroine", duration: "3:13", coverUrl: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?q=80&w=200&auto=format&fit=crop", meaning: "A celebration of teenage community and the shared experience of growing up in a place that feels distinct from the mainstream. It's about finding strength in your own 'team'." },
-    { title: "Electric Feel", artist: "MGMT", album: "Oracular Spectacular", duration: "3:49", coverUrl: "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=200&auto=format&fit=crop", meaning: "A psychedelic, disco-tinged track about the powerful, almost supernatural attraction between two people. It's a sonic journey through a landscape of pure energy." }
+    { title: "Gangsta's Paradise", artist: "Coolio", album: "Gangsta's Paradise", duration: "4:00", coverUrl: "https://images.unsplash.com/photo-1514525253440-b393452e8d03?q=80&w=200&auto=format&fit=crop", meaning: "A profound reflection on the struggles and reality of life in the inner city. It explores themes of survival, mortality, and the cycle of violence, set against a hauntingly beautiful melody." },
+    { title: "Double Life", artist: "Pharrell Williams", album: "Despicable Me 4", duration: "3:07", coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=200&auto=format&fit=crop", meaning: "Explores the complexity of maintaining different identities or secrets. It's an upbeat yet thought-provoking track about the hidden layers of our lives." },
+    { title: "Chicago Freestyle", artist: "Drake & Giveon", album: "Dark Lane Demo Tapes", duration: "3:40", coverUrl: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop", meaning: "A moody, late-night reflection on fame, relationships, and the isolation that often comes with success. Giveon's soulful vocals add a layer of melancholy to Drake's introspective verses." },
+    { title: "Thriller", artist: "Michael Jackson", album: "Thriller", duration: "5:57", coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=200&auto=format&fit=crop", meaning: "The ultimate cinematic pop experience, using horror themes to explore the excitement and fear of the unknown. It's a masterpiece of storytelling and production." },
+    { title: "Bad to the Bone", artist: "George Thorogood & The Destroyers", album: "Bad to the Bone", duration: "4:50", coverUrl: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?q=80&w=200&auto=format&fit=crop", meaning: "A classic rock anthem about confidence and a rebellious spirit. The driving riff and gritty vocals capture a raw, unapologetic energy." },
+    { title: "God's Plan", artist: "Drake", album: "Scorpion", duration: "3:18", coverUrl: "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=200&auto=format&fit=crop", meaning: "A reflection on destiny, gratitude, and the forces that shape our paths. It's a song about humility in the face of immense success." },
+    { title: "Can't Stop", artist: "Red Hot Chili Peppers", album: "By the Way", duration: "4:29", coverUrl: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?q=80&w=200&auto=format&fit=crop", meaning: "A high-energy celebration of passion and the unstoppable drive to follow your own creative path. It's an anthem of individuality and persistence." }
   ];
 
   for (const song of songsData) {
