@@ -48,7 +48,7 @@ export function SongRow({ song, index, onPlay, isPlaying }: SongRowProps) {
       <div className="flex items-center gap-4 overflow-hidden">
         <motion.img 
           animate={isPlaying ? { rotate: 360 } : { rotate: 0 }}
-          transition={isPlaying ? { duration: 10, repeat: Infinity, ease: "linear" } : { duration: 0 }}
+          transition={isPlaying ? { duration: 6, repeat: Infinity, ease: "linear" } : { duration: 0.5 }}
           src={song.coverUrl} 
           alt={song.album} 
           className={cn(

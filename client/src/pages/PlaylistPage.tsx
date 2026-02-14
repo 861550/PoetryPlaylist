@@ -303,39 +303,41 @@ export default function PlaylistPage() {
                 </div>
               )}
 
-              {/* Right side: Explore */}
-              <div className="flex flex-col w-1/2 h-[70vh] pl-12 md:pl-24 justify-center">
-                <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground mb-6 opacity-50">Song Meaning</h3>
-                <ScrollArea className="flex-1 rounded-3xl bg-white/5 p-10 ring-1 ring-white/10 shadow-2xl backdrop-blur-sm">
-                  <p className="text-2xl leading-relaxed text-white/90 font-medium italic">
-                    {currentSong.meaning}
-                  </p>
-                </ScrollArea>
-                
-                <div className="mt-12 flex flex-col items-center w-full gap-8">
-                  <div className="flex items-center gap-12">
-                    <button 
-                      onClick={togglePlay}
-                      className="w-20 h-20 rounded-full bg-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)]"
-                    >
-                      {isPlaying ? <Pause className="w-8 h-8 text-black fill-black" /> : <Play className="w-8 h-8 text-black fill-black ml-1" />}
-                    </button>
-                    <button onClick={handleNext}>
-                      <SkipForward className="w-8 h-8 text-muted-foreground hover:text-white cursor-pointer transition-all hover:scale-110" />
-                    </button>
-                  </div>
-                  <div className="w-full flex items-center gap-6 pointer-events-none opacity-80">
-                    <span className="text-sm text-muted-foreground tabular-nums min-w-[45px] font-medium">{formatTime(currentTime)}</span>
-                    <Slider 
-                      value={[currentTime]} 
-                      max={durationSeconds} 
-                      step={1} 
-                      className="flex-1 [&_[role=slider]]:bg-purple-500 [&_[role=slider]]:border-purple-500 [&_.bg-primary]:bg-purple-500 [&_[role=slider]]:w-4 [&_[role=slider]]:h-4"
-                    />
-                    <span className="text-sm text-muted-foreground tabular-nums min-w-[45px] font-medium">{currentSong.duration}</span>
+              {/* Full Screen Right Side: Explore */}
+              {isFullScreen && (
+                <div className="flex flex-col w-1/2 h-[70vh] pl-12 md:pl-24 justify-center">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground mb-6 opacity-50">Song Meaning</h3>
+                  <ScrollArea className="flex-1 rounded-3xl bg-white/5 p-10 ring-1 ring-white/10 shadow-2xl backdrop-blur-sm">
+                    <p className="text-2xl leading-relaxed text-white/90 font-medium italic">
+                      {currentSong.meaning}
+                    </p>
+                  </ScrollArea>
+                  
+                  <div className="mt-12 flex flex-col items-center w-full gap-8">
+                    <div className="flex items-center gap-12">
+                      <button 
+                        onClick={togglePlay}
+                        className="w-20 h-20 rounded-full bg-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)]"
+                      >
+                        {isPlaying ? <Pause className="w-8 h-8 text-black fill-black" /> : <Play className="w-8 h-8 text-black fill-black ml-1" />}
+                      </button>
+                      <button onClick={handleNext}>
+                        <SkipForward className="w-8 h-8 text-muted-foreground hover:text-white cursor-pointer transition-all hover:scale-110" />
+                      </button>
+                    </div>
+                    <div className="w-full flex items-center gap-6 pointer-events-none opacity-80">
+                      <span className="text-sm text-muted-foreground tabular-nums min-w-[45px] font-medium">{formatTime(currentTime)}</span>
+                      <Slider 
+                        value={[currentTime]} 
+                        max={durationSeconds} 
+                        step={1} 
+                        className="flex-1 [&_[role=slider]]:bg-purple-500 [&_[role=slider]]:border-purple-500 [&_.bg-primary]:bg-purple-500 [&_[role=slider]]:w-4 [&_[role=slider]]:h-4"
+                      />
+                      <span className="text-sm text-muted-foreground tabular-nums min-w-[45px] font-medium">{currentSong.duration}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Right side: Extra actions (Non-full screen only) */}
               {!isFullScreen && (
