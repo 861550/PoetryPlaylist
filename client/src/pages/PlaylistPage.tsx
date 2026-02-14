@@ -1,7 +1,7 @@
 import { usePlaylist, usePlaylistSongs } from "@/hooks/use-music";
 import { PlaylistHeader } from "@/components/PlaylistHeader";
 import { SongRow } from "@/components/SongRow";
-import { Clock, Loader2, MoreHorizontal, Heart, ArrowDownCircle, Play, Pause, Square, SkipForward, X } from "lucide-react";
+import { Clock, Loader2, MoreHorizontal, Heart, ArrowDownCircle, Play, Pause, Square, SkipForward, X, SmartphoneChargingIcon } from "lucide-react";
 import { useEffect, useState, useRef, useMemo } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Song } from "@shared/schema";
@@ -77,17 +77,18 @@ export default function PlaylistPage() {
     setIsPlaying(true);
     setCurrentTime(0);
     
-    // Create or update audio element
     if (!audioRef.current) {
       audioRef.current = new Audio();
+      audioRef.current.onended = () => {
+        handleNext();
+      };
     }
     
-    // Point to the public audio folder
-    // Note: User needs to upload files as 1.mp3, 2.mp3 etc in client/public/audio/
-    audioRef.current.src = `/audio/${song.id}.mp3`;
+    // Use correct public path for the browser
+    audioRef.current.src = `/audio/${song.id - (songs?.[0]?.id || 0) + 1}.mp3`;
+    audioRef.current.load();
     audioRef.current.play().catch(err => {
       console.error("Playback failed:", err);
-      // We still simulate the UI progress even if file is missing
     });
   };
 
@@ -210,7 +211,7 @@ export default function PlaylistPage() {
           <div className="flex flex-col pb-12">
             {songs?.map((song, index) => (
               <SongRow 
-                key={song.id} 
+                key={playlistId} 
                 song={song} 
                 index={index} 
                 onPlay={() => handlePlaySong(song)}
@@ -219,7 +220,7 @@ export default function PlaylistPage() {
             ))}
             
             <div className="mt-8 pt-8 border-t border-white/10 text-xs text-muted-foreground flex flex-col gap-1">
-               <p>© Krish 78FI English Poetry Playlist</p>
+               <p>© Krish 78FI - English Poetry Playlist</p>
             </div>
           </div>
         </div>

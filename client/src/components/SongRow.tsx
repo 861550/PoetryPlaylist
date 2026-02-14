@@ -85,11 +85,11 @@ export function SongRow({ song, index, onPlay, isPlaying }: SongRowProps) {
                 <MoreHorizontal className="w-4 h-4 text-muted-foreground hover:text-white cursor-pointer" />
               </button>
             </DialogTrigger>
-            <DialogContent className="bg-[#181818] border-none text-white max-w-md overflow-hidden p-0 rounded-xl shadow-2xl">
-              <div className="relative h-48 w-full">
+            <DialogContent className="bg-[#181818] border-none text-white max-w-md overflow-hidden p-0 rounded-2xl shadow-2xl">
+              <div className="relative h-56 w-full">
                 {/* Blurred background */}
                 <div 
-                  className="absolute inset-0 bg-cover bg-center filter blur-xl opacity-40 scale-110"
+                  className="absolute inset-0 bg-cover bg-center filter blur-2xl opacity-50 scale-125"
                   style={{ backgroundImage: `url(${song.coverUrl})` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#181818]" />
@@ -98,19 +98,19 @@ export function SongRow({ song, index, onPlay, isPlaying }: SongRowProps) {
                   <img 
                     src={song.coverUrl} 
                     alt={song.album} 
-                    className="w-32 h-32 rounded-md shadow-2xl object-cover mb-4 ring-1 ring-white/10" 
+                    className="w-36 h-36 rounded-md shadow-2xl object-cover mb-4 ring-1 ring-white/10" 
                   />
                   <div className="text-center">
                     <DialogTitle className="text-2xl font-bold tracking-tight">{song.title}</DialogTitle>
-                    <p className="text-purple-400 font-medium">{song.artist}</p>
+                    <p className="text-purple-400 font-semibold">{song.artist}</p>
                   </div>
                 </DialogHeader>
               </div>
               
-              <div className="px-8 pb-8 pt-4">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Song Meaning</h3>
-                <ScrollArea className="h-[250px] rounded-lg bg-black/20 p-6 ring-1 ring-white/5">
-                  <p className="text-base leading-relaxed text-white/90">
+              <div className="px-8 pb-10 pt-4">
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4">Song Meaning</h3>
+                <ScrollArea className="h-[280px] rounded-xl bg-black/30 p-6 ring-1 ring-white/5">
+                  <p className="text-base leading-relaxed text-white/90 font-medium">
                     {song.meaning || "This song explores themes of artistic expression and creative energy."}
                   </p>
                 </ScrollArea>
