@@ -1,5 +1,5 @@
 import { Song } from "@shared/schema";
-import { Play, Heart, MoreHorizontal, Pause } from "lucide-react";
+import { Play, Heart, MoreHorizontal, Pause, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { motion } from "framer-motion";
 
 interface SongRowProps {
   song: Song;
@@ -20,6 +21,7 @@ interface SongRowProps {
 
 export function SongRow({ song, index, onPlay, isPlaying }: SongRowProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [showExplore, setShowExplore] = useState(false);
 
   return (
     <div
@@ -44,10 +46,15 @@ export function SongRow({ song, index, onPlay, isPlaying }: SongRowProps) {
 
       {/* Title & Artist Column */}
       <div className="flex items-center gap-4 overflow-hidden">
-        <img 
+        <motion.img 
+          animate={isPlaying ? { rotate: 360 } : { rotate: 0 }}
+          transition={isPlaying ? { duration: 10, repeat: Infinity, ease: "linear" } : { duration: 0 }}
           src={song.coverUrl} 
           alt={song.album} 
-          className="w-10 h-10 rounded-sm object-cover shadow-sm shrink-0" 
+          className={cn(
+            "w-10 h-10 object-cover shadow-sm shrink-0 transition-all duration-500",
+            isPlaying ? "rounded-full" : "rounded-sm"
+          )}
         />
         <div className="flex flex-col overflow-hidden">
           <span className={cn(
@@ -79,7 +86,7 @@ export function SongRow({ song, index, onPlay, isPlaying }: SongRowProps) {
         </span>
         
         <div className="opacity-0 group-hover:opacity-100 transition-opacity" onClick={(e) => e.stopPropagation()}>
-          <Dialog>
+          <Dialog open={showExplore} onOpenChange={setShowExplore}>
             <DialogTrigger asChild>
               <button className="focus:outline-none">
                 <MoreHorizontal className="w-4 h-4 text-muted-foreground hover:text-white cursor-pointer" />
@@ -94,6 +101,15 @@ export function SongRow({ song, index, onPlay, isPlaying }: SongRowProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#181818]" />
                 
+                <div className="absolute top-4 right-4 z-50">
+                  <button 
+                    onClick={() => setShowExplore(false)}
+                    className="w-8 h-8 rounded-full bg-black/40 flex items-center justify-center hover:bg-black/60 transition-colors"
+                  >
+                    <X className="w-5 h-5 text-white" />
+                  </button>
+                </div>
+
                 <DialogHeader className="relative z-10 p-6 flex flex-col items-center justify-center h-full pt-12">
                   <img 
                     src={song.coverUrl} 
