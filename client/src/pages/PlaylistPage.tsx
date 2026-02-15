@@ -128,6 +128,7 @@ export default function PlaylistPage() {
   useEffect(() => {
     if (currentTime >= durationSeconds && durationSeconds > 0) {
       setCurrentTime(0);
+      handleNext();
     }
   }, [currentTime, durationSeconds]);
 

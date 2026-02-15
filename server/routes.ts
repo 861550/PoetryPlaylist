@@ -51,78 +51,15 @@ async function seedDatabase() {
   }
 
   const songsData = [
-    { 
-      title: "Ric Flair Drip", 
-      artist: "Metro Boomin & Offset", 
-      album: "Without Warning", 
-      duration: "2:53", 
-      coverUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/d/de/21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png/250px-21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png", 
-      meaning: "The flamboyant lifestyle and high-energy success are compared through the use of vibrant metaphors and cultural allusions, particularly the figure of Ric Flair, symbolizing exuberant confidence and material achievement." 
-    },
-    { 
-      title: "Gangsta's Paradise", 
-      artist: "Coolio", 
-      album: "Gangsta's Paradise", 
-      duration: "4:17", 
-      coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuTvX_oWfqXAXpIE_WGvHJwh0N6c9dP7uzMA&s", 
-      meaning: "This track utilizes a solemn, haunting melody and poignant biblical allusions (Psalm 23) to create an ironic juxtaposition between the spiritual ideal of paradise and the harsh, cyclical reality of urban struggle." 
-    },
-    { 
-      title: "Double Life", 
-      artist: "Pharrell Williams", 
-      album: "Despicable Me 4", 
-      duration: "3:13", 
-      coverUrl: "https://i.scdn.co/image/ab67616d0000b2735c80411d3a12be9220b39700", 
-      meaning: "The song employs rhythmic syncopation and a dualistic lyrical structure to mirror the theme of hidden identities, using energetic production to mask the underlying complexity of living a split existence." 
-    },
-    { 
-      title: "Chicago Freestyle", 
-      artist: "Drake & Giveon", 
-      album: "Dark Lane Demo Tapes", 
-      duration: "3:42", 
-      coverUrl: "https://cdn-images.dzcdn.net/images/cover/d46b7a8aa40ef7f09d71a03c2ce8edcd/500x500.jpg", 
-      meaning: "A melancholic use of intertextuality (referencing Eminem's 'Superman') combined with Giveon's deep, baritone vocal texture, establishing an atmosphere of introspective isolation and the fleeting nature of fame." 
-    },
-    { 
-      title: "Thriller", 
-      artist: "Michael Jackson", 
-      album: "Thriller", 
-      duration: "5:58", 
-      coverUrl: "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png", 
-      meaning: "Employing cinematic soundscapes and personification of horror tropes, the lyrics weave a narrative of suspense that functions as an allegory for the visceral thrill and paralyzing fear of the unknown." 
-    },
-    { 
-      title: "Bad to the Bone", 
-      artist: "George Thorogood & The Destroyers", 
-      album: "Bad to the Bone", 
-      duration: "4:51", 
-      coverUrl: "https://m.media-amazon.com/images/I/71U2o+v6kVL._UF1000,1000_QL80_.jpg", 
-      meaning: "The driving, repetitive blues riff serves as an auditory hyperbole for the persona's legendary toughness, while the gritty vocal delivery reinforces the unapologetic, rebellious spirit of the protagonist." 
-    },
-    { 
-      title: "God's Plan", 
-      artist: "Drake", 
-      album: "Scorpion", 
-      duration: "3:19", 
-      coverUrl: "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=200&auto=format&fit=crop", 
-      meaning: "The track explores the concept of pre-determinism and cosmic irony, contrasting the envy of adversaries with the narrator's sense of divine protection and the inevitable path of success." 
-    },
-    { 
-      title: "Can't Stop", 
-      artist: "Red Hot Chili Peppers", 
-      album: "By the Way", 
-      duration: "4:30", 
-      coverUrl: "https://upload.wikimedia.org/wikipedia/en/8/8e/RedHotChiliPeppersCantStop.jpg", 
-      meaning: "The frenetic, percussive vocal delivery and abstract imagery create an impressionistic portrait of creative momentum, celebrating the unstoppable drive of individual expression and the vitality of the present moment." 
-    },
-    { 
-      title: "7 minute drill", 
-      artist: "J. Cole", 
-      album: "Might Delete Later", 
-      duration: "3:33", 
-      coverUrl: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop", 
-      meaning: " COLE exhibits lyrical dexterity through dense internal rhyme schemes and extended metaphors, using a high-pressure narrative frame to critique the artistic industry and assert his technical dominance." 
-    }
+    { title: "Ric Flair Drip", artist: "Metro Boomin & Offset", album: "Without Warning", duration: "2:53", coverUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/d/de/21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png/250px-21_Savage%2C_Offset_%26_Metro_Boomin_-_Without_Warning.png", meaning: "This song is a high-energy celebration of success and the lavish lifestyle associated with it. The 'Ric Flair Drip' refers to the flamboyant style of legendary wrestler Ric Flair, symbolizing wealth and confidence. Offset's verses describe his journey to the top, while Metro Boomin's production provides a hard-hitting backdrop. It's an anthem of achievement and style." },
+    { title: "Gangsta's Paradise", artist: "Coolio", album: "Gangsta's Paradise", duration: "4:17", coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuTvX_oWfqXAXpIE_WGvHJwh0N6c9dP7uzMA&s", meaning: "A profound reflection on the struggles and reality of life in the inner city. It explores themes of survival, mortality, and the cycle of violence, set against a hauntingly beautiful melody." },
+    { title: "Double Life", artist: "Pharrell Williams", album: "Despicable Me 4", duration: "3:13", coverUrl: "https://i.scdn.co/image/ab67616d0000b2735c80411d3a12be9220b39700", meaning: "Explores the complexity of maintaining different identities or secrets. It's an upbeat yet thought-provoking track about the hidden layers of our lives." },
+    { title: "Chicago Freestyle", artist: "Drake & Giveon", album: "Dark Lane Demo Tapes", duration: "3:42", coverUrl: "https://cdn-images.dzcdn.net/images/cover/d46b7a8aa40ef7f09d71a03c2ce8edcd/500x500.jpg", meaning: "A moody, late-night reflection on fame, relationships, and the isolation that often comes with success. Giveon's soulful vocals add a layer of melancholy to Drake's introspective verses." },
+    { title: "Thriller", artist: "Michael Jackson", album: "Thriller", duration: "5:58", coverUrl: "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png", meaning: "The ultimate cinematic pop experience, using horror themes to explore the excitement and fear of the unknown. It's a masterpiece of storytelling and production." },
+    { title: "Bad to the Bone", artist: "George Thorogood & The Destroyers", album: "Bad to the Bone", duration: "4:51", coverUrl: "https://m.media-amazon.com/images/I/71U2o+v6kVL._UF1000,1000_QL80_.jpg", meaning: "A classic rock anthem about confidence and a rebellious spirit. The driving riff and gritty vocals capture a raw, unapologetic energy." },
+    { title: "God's Plan", artist: "Drake", album: "Scorpion", duration: "3:19", coverUrl: "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=200&auto=format&fit=crop", meaning: "A reflection on destiny, gratitude, and the forces that shape our paths. It's a song about humility in the face of immense success." },
+    { title: "Can't Stop", artist: "Red Hot Chili Peppers", album: "By the Way", duration: "4:30", coverUrl: "https://upload.wikimedia.org/wikipedia/en/8/8e/RedHotChiliPeppersCantStop.jpg", meaning: "A high-energy celebration of passion and the unstoppable drive to follow your own creative path. It's an anthem of individuality and persistence." },
+    { title: "7 minute drill", artist: "J. Cole", album: "Might Delete Later", duration: "3:33", coverUrl: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop", meaning: "A lyrical exhibition showing technical skill and wordplay. It's an exploration of mastery in the craft of rap, blending introspection with competitive spirit." }
   ];
 
   for (const song of songsData) {
