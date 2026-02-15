@@ -125,13 +125,6 @@ export default function PlaylistPage() {
     setIsFullScreen(false);
   };
 
-  useEffect(() => {
-    if (currentTime >= durationSeconds && durationSeconds > 0) {
-      setCurrentTime(0);
-      handleNext();
-    }
-  }, [currentTime, durationSeconds]);
-
   if (isLoadingPlaylist || isLoadingSongs) {
     return (
       <div className="h-screen w-full flex items-center justify-center bg-[#121212] text-white">
@@ -313,7 +306,7 @@ export default function PlaylistPage() {
               {/* Full Screen Right Side: Explore */}
               {isFullScreen && (
                 <div className="flex flex-col w-1/2 h-[70vh] pl-12 md:pl-24 justify-center">
-                  <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground mb-6 opacity-50">Poetic Device(s)</h3>
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground mb-6 opacity-50">Song Meaning</h3>
                   <ScrollArea className="flex-1 rounded-3xl bg-white/5 p-10 ring-1 ring-white/10 shadow-2xl backdrop-blur-sm">
                     <p className="text-2xl leading-relaxed text-white/90 font-medium italic">
                       {currentSong.meaning}
@@ -394,7 +387,7 @@ export default function PlaylistPage() {
             </div>
             
             <div className="px-8 pb-10 pt-4">
-              <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4">Poetic Device(s)</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4">Song Meaning</h3>
               <ScrollArea className="h-[280px] rounded-xl bg-black/30 p-6 ring-1 ring-white/5">
                 <p className="text-base leading-relaxed text-white/90 font-medium">
                   {currentSong.meaning}
