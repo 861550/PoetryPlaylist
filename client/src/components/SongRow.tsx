@@ -124,7 +124,7 @@ export function SongRow({ song, index, onPlay, isPlaying }: SongRowProps) {
               </div>
               
               <div className="px-8 pb-10 pt-4">
-                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4">Song Meaning</h3>
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4">Poetic Devices</h3>
                 <ScrollArea className="h-[280px] rounded-xl bg-black/30 p-6 ring-1 ring-white/5">
                   <p className="text-base leading-relaxed text-white/90 font-medium">
                     {song.meaning || "This song explores themes of artistic expression and creative energy."}
