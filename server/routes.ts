@@ -38,7 +38,7 @@ async function seedDatabase() {
     name: "Poetry Playlist",
     description: "English Poetry Playlist",
     author: "Krish 78FI",
-    coverUrl: "https://lh3.googleusercontent.com/drive-storage/AJQWtBPQ9D31HdFhktF31LbbkZ7Fru-XGdWJMlm7FHF_4pN8tF-6r5tOF_C-476YjLxI4bNVE7HMZifTudPf3B6VmDBpKmiebxLNnUS1LaleqZYYp3h9=w1366-h647?auditContext=forDisplay",
+    coverUrl: "https://lh3.googleusercontent.com/drive-storage/AJQWtBO78JvDR5A6ujSSoDr_RUXj_GF_eunQU-4JNFttGUzipKcUF4I1cS9n9uJ60ybTFPIPWHraPyb83a5LoNdk3e-p00eR9B6_p-4x_KjBOBQtkQy5=w1600-h739?auditContext=forDisplay",
     likes: 12345,
   };
 

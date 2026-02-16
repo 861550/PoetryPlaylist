@@ -75,15 +75,20 @@ export default function PlaylistPage() {
   }, [isPlaying, currentSong, durationSeconds]);
 
   const handlePlaySong = (song: Song) => {
+    // Reset timer immediately when a new song starts or old one ends
+    setCurrentTime(0);
     setCurrentSong(song);
     setIsPlaying(true);
-    setCurrentTime(0);
     
     if (!audioRef.current) {
       audioRef.current = new Audio();
       audioRef.current.onended = () => {
+        setCurrentTime(0); // Reset timer to 0
         handleNext();
       };
+    } else {
+      // Ensure timer is reset even if reusing audio object
+      audioRef.current.currentTime = 0;
     }
     
     const songIndex = songs?.findIndex(s => s.id === song.id) ?? 0;
@@ -100,6 +105,7 @@ export default function PlaylistPage() {
     if (currentIndex < songs.length - 1) {
       handlePlaySong(songs[currentIndex + 1]);
     } else {
+      setCurrentTime(0); // Ensure reset at end of playlist
       stopPlayback();
     }
   };
